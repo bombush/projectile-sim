@@ -1,3 +1,6 @@
+# Visual Studio user folder
+.vs/*
+
 # Prerequisites
 *.d
 
