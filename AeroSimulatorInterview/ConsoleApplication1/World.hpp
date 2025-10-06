@@ -17,6 +17,8 @@ class GWorld {
 		// main simulation step
 		void Tick(float dt);
 
+		entt::registry& GetRegistry();
+
 
 	private:
 		// entity registry

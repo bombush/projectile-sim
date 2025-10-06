@@ -26,3 +26,7 @@ void GWorld::Tick(float dt) {
 	//movementSystem.Update(dt);
 	// Other systems would be updated here as well
 }
+
+entt::registry& GWorld::GetRegistry() {
+	return registry;
+}
