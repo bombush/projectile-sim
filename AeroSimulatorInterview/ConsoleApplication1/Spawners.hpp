@@ -9,5 +9,5 @@
 namespace Spawners {
 	entt::entity SpawnTarget(GWorld& world, const Types::GVector& position, float radius);
 	entt::entity SpawnProjectile(GWorld& world, const Types::GVector& position, const Types::GVector& muzzle_velocity, float radius, float drag_coefficient);
-	entt::entity SpawnTerrain(GWorld& world, float height);
+	entt::entity SpawnTerrain(GWorld& world, float z_position);
 }

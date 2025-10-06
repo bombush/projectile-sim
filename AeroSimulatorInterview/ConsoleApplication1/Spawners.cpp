@@ -27,4 +27,12 @@ namespace Spawners {
 
 		return entity;
 	}
+
+	entt::entity SpawnTerrain(GWorld& world, float z_position) {
+		auto registry = world.GetRegistry();
+		auto entity = world.GetRegistry().create();
+		registry.emplace<CompTerrainCollision>(entity, z_position);
+		registry.emplace<TagTerrain>(entity);
+		return entity;
+	}
 } // namespace Spawners
