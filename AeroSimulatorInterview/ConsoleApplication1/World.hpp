@@ -14,4 +14,5 @@ class GWorld {
 	private:
 		entt::registry registry;
 		float gravity{ -9.81f };
+		float bounding_sphere_radius{ 1000.0f };
 };

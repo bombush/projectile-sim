@@ -13,9 +13,11 @@ namespace Components {
 	struct CompPosition : GVector {};
 
 	struct CompCollisionSphere { float radius; };
+	struct CompTerrainCollision { float height; };
 
 	struct TagTarget {};
 	struct TagProjectile {};
+	struct TagTerrain {};
 
 }
 
