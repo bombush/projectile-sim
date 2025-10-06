@@ -81,3 +81,5 @@ namespace Systems {
 		}
 	}
 }
+
+// @TODO: projectiles or target could be spawned out of bounds?

@@ -2,6 +2,7 @@
 
 namespace Types {
 
+	// basic 3D vector
 	struct GVector
 	{
 		float x;
@@ -53,14 +54,6 @@ namespace Types {
 			return (*this - other).length();
 		}
 
-	};
-
-	struct GColor
-	{
-		float r;
-		float g;
-		float b;
-		float a;
 	};
 
 }

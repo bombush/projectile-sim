@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components.hpp" />
+    <ClInclude Include="Scenarios.hpp" />
     <ClInclude Include="World.hpp" />
     <ClInclude Include="Systems.hpp" />
     <ClInclude Include="Types.hpp" />
