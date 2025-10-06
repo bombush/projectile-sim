@@ -41,5 +41,8 @@
     <ClInclude Include="Scenarios.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Spawners.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
