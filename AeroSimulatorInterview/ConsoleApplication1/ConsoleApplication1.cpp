@@ -10,7 +10,10 @@
 #include "Components.hpp"
 #include "World.hpp"
 
-//@TODO: implement Scenario constructor that sets up the world. And testing.
+// @TODO: implement Scenario constructor that sets up the world. And testing.
+// @TODO: test destroy target in ballistic curve
+// @TODO: test out of bounds destroy
+// @TODO: test terrain destroy
 
 int main()
 {

@@ -1,8 +1,11 @@
+#include <iostream>
+#include <iomanip>
+#include "entt/entt.hpp"
+
 #include "Systems.hpp"
 #include "Components.hpp"
 #include "Events.hpp"
 
-#include "entt/entt.hpp"
 
 namespace Systems {
 
@@ -15,6 +18,16 @@ namespace Systems {
 				vel.z = vel.z + (acc.z + gravity) * dt;
 
 				pos += vel * dt;
+			}
+		);
+
+		world.GetRegistry().view<Components::CompVelocity, Components::CompPosition>().each(
+			[](auto &vel, auto &pos) {
+				// write out projectile location and velocity to the stdout and format with 2 decimal places and human readable description
+				std::cout << "Projectile " << 1 << " Position: (" << std::fixed << std::setprecision(2) << pos.x << ", " << pos.y << ", " << pos.z << ") Velocity: (" << vel.x << ", " << vel.y << ", " << vel.z << ")\n";
+
+
+				//world.GetDispatcher().trigger<Events::EvtProjectileMoved>(entity, dt);
 			}
 		);
 	}
