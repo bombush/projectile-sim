@@ -9,7 +9,7 @@
 #include "Components.hpp"
 #include "World.hpp"
 
-//@TODO: tick the World directly, finish implementation of Scenarios and testing
+//@TODO: finish implementation of Scenarios and testing
 
 int main()
 {

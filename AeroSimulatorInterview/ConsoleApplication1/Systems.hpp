@@ -2,24 +2,26 @@
 
 #include <entt/entt.hpp>
 
+#include "World.hpp"
+
 namespace Systems {
 
 
 	class SysMovement
 	{
 		public:
-			void Update(entt::registry& registry, float gravity, float dt);
+			void Update(GWorld& world, float gravity, float dt);
 	};
 
 	class SysCollision
 	{
 		public:
-			void Update(entt::registry& registry);
+			void Update(GWorld& world);
 	};
 
 	class SysWorldBounds
 	{
 		public:
-			void Update(entt::registry& registry, float bounding_sphere_radius);
+			void Update(GWorld& world,  float bounding_sphere_radius);
 	};
 }

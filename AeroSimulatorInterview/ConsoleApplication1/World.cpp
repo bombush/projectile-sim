@@ -7,6 +7,7 @@
 
 GWorld::GWorld() {
 	registry = entt::registry{};
+	dispatcher = entt::dispatcher{};
 }
 
 GWorld::GWorld(const GWorldConfig& config) : GWorld() {

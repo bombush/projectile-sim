@@ -17,6 +17,7 @@ class GWorld {
 		void Run(float total_simulation_time, float time_step);
 
 		entt::registry& GetRegistry();
+		entt::dispatcher& GetDispatcher() { return dispatcher; }
 
 
 	private:
@@ -24,6 +25,7 @@ class GWorld {
 	private:
 		// entity registry
 		entt::registry registry;
+		entt::dispatcher dispatcher;
 
 		// world parameters
 		float gravity{ -9.81f };

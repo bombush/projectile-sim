@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components.hpp" />
+    <ClInclude Include="Events.hpp" />
     <ClInclude Include="Scenarios.hpp" />
     <ClInclude Include="Spawners.hpp" />
     <ClInclude Include="World.hpp" />
