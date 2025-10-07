@@ -6,22 +6,19 @@
 #include <thread>
 #include <chrono>
 
+#include "Scenarios.hpp"
 #include "Components.hpp"
 #include "World.hpp"
 
-//@TODO: finish implementation of Scenarios and testing
+//@TODO: implement Scenario constructor that sets up the world. And testing.
 
 int main()
 {
-	// spawn the world
-	auto World = GWorld();
+	auto scenario = Scenarios::BaseScenario{};
+	scenario.Setup();
+	scenario.Run();
 
-
-	World.Run(10.0f, 0.016f);
-
-
-
-    std::cout << "Hello World!\n";
+    std::cout << "\n\nGoodbye World!\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

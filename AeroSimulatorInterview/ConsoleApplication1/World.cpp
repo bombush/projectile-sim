@@ -43,7 +43,7 @@ void GWorld::Run(float total_simulation_time, float time_step) {
 		auto now = std::chrono::steady_clock::now();
 		std::chrono::duration<float> frame_duration = now - last_frame_time;
 		float dt = frame_duration.count();
-		float fps = 1.0f / dt;
+		float fps = (dt > 0.0f) ? (1.0f / dt) : 0.0f;
 
 		// tick the world
 		last_frame_time = now; // update last frame time before tick to avoid time spent in Tick() to be counted in dt
@@ -63,10 +63,8 @@ void GWorld::Tick(float dt) {
 	Systems::SysMovement movementSystem;
 	Systems::SysCollision collisionSystem;
 	Systems::SysWorldBounds worldBoundsSystem;
-	Systems::SysPendingDestroy pendingDestroySystem;
 
-	movementSystem.Update(*this, gravity, dt);
-	collisionSystem.Update(*this);
-	worldBoundsSystem.Update(*this, bounding_sphere_radius);
-	pendingDestroySystem.Update(*this);
+	movementSystem.Tick(*this, gravity, dt);
+	collisionSystem.Tick(*this);
+	worldBoundsSystem.Tick(*this, bounding_sphere_radius);
 }

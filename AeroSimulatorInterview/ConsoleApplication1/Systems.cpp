@@ -6,7 +6,7 @@
 
 namespace Systems {
 
-	void SysMovement::Update(GWorld& world, float gravity, float dt)
+	void SysMovement::Tick(GWorld& world, float gravity, float dt)
 	{
 		world.GetRegistry().view<Components::CompPosition, Components::CompVelocity, Components::CompAcceleration>().each(
 			[gravity, dt](auto &pos, auto &vel, auto &acc) {
@@ -20,7 +20,7 @@ namespace Systems {
 	}
 
 	// check collision between projectiles and targets and terrain
-	void SysCollision::Update(GWorld& world)
+	void SysCollision::Tick(GWorld& world)
 	{
 		// lets's go with a naive implementation first with assuming that projectiles cannot collide with each other
 		// if we want an efficient way to detect collisions between all objects, we need to implement broadphase collision detection
@@ -41,12 +41,8 @@ namespace Systems {
 				if(dist < (sphere_projectile.radius + sphere_target.radius))
 				{
 					// collision!
-					//world.GetRegistry().destroy(projectile);
-					//world.GetRegistry().destroy(target);
-					world.GetRegistry().emplace_or_replace<Components::TagPendingDestroy > (projectile); // mark projectile for destruction)
-					world.GetRegistry().emplace_or_replace<Components::TagPendingDestroy >(target); // mark target for destruction)
-					world.GetDispatcher().enqueue<Events::EventTargetDestroyed>(Events::EDestroyReason::HitByProjectile);
-
+					world.GetRegistry().destroy(projectile);
+					world.GetRegistry().destroy(target);
 					break; 
 				}
 				
@@ -66,12 +62,7 @@ namespace Systems {
 					// collision with terrain!
 					// @TODO: write to STDOUT
 
-					world.GetRegistry().emplace_or_replace<Components::TagPendingDestroy>(projectile); // mark projectile for destruction
-					///world.GetRegistry().destroy(projectile); // destroy the projectile
-
-					// @TODO: shouldn't I trigger events immediately?
-					// @TODO: more performant approach: build an array of destroyed entities and reasons in the loop, and trigger events and destroy after all collisions are processed?
-					world.GetDispatcher().enqueue<Events::EventTargetDestroyed>(Events::EDestroyReason::CollisionWithTerrain);  
+					world.GetRegistry().destroy(projectile); // destroy the projectile
 					break;
 				}
 
@@ -79,7 +70,7 @@ namespace Systems {
 		}
 	}
 
-	void SysWorldBounds::Update(GWorld& world, float bounding_sphere_radius)
+	void SysWorldBounds::Tick(GWorld& world, float bounding_sphere_radius)
 	{
 		auto entities = world.GetRegistry().view<Components::CompPosition>();
 		for (auto entity : entities)
@@ -89,15 +80,6 @@ namespace Systems {
 			{
 				world.GetRegistry().destroy(entity); //@TODO: send out of bounds message
 			}
-		}
-	}
-
-	void SysPendingDestroy::Update(GWorld& world)
-	{
-		auto entities = world.GetRegistry().view<Components::TagPendingDestroy>();
-		for (auto entity : entities)
-		{
-			world.GetRegistry().destroy(entity);
 		}
 	}
 }

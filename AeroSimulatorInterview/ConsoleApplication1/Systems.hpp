@@ -1,33 +1,28 @@
 #pragma once
 
 #include <entt/entt.hpp>
-
 #include "World.hpp"
 
 namespace Systems {
 
-
 	class SysMovement
 	{
-		public:
-			void Update(GWorld& world, float gravity, float dt);
+	public:
+		// Updates movement of entities based on velocity, acceleration, and gravity
+		void Tick(GWorld& world, float gravity, float dt);
 	};
 
 	class SysCollision
 	{
-		public:
-			void Update(GWorld& world);
+	public:
+		// Checks collision between projectiles, targets, and terrain
+		void Tick(GWorld& world);
 	};
 
 	class SysWorldBounds
 	{
-		public:
-			void Update(GWorld& world,  float bounding_sphere_radius);
-	};
-
-	class SysPendingDestroy
-	{
-		public:
-			void Update(GWorld& world);
+	public:
+		// Checks if entities are out of world bounds
+		void Tick(GWorld& world, float bounding_sphere_radius);
 	};
 }
