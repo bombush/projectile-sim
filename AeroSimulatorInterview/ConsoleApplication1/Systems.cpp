@@ -41,8 +41,10 @@ namespace Systems {
 				if(dist < (sphere_projectile.radius + sphere_target.radius))
 				{
 					// collision!
-					world.GetRegistry().destroy(projectile);
-					world.GetRegistry().destroy(target);
+					//world.GetRegistry().destroy(projectile);
+					//world.GetRegistry().destroy(target);
+					world.GetRegistry().emplace_or_replace<Components::TagPendingDestroy > (projectile); // mark projectile for destruction)
+					world.GetRegistry().emplace_or_replace<Components::TagPendingDestroy >(target); // mark target for destruction)
 					world.GetDispatcher().enqueue<Events::EventTargetDestroyed>(Events::EDestroyReason::HitByProjectile);
 
 					break; 
@@ -64,8 +66,12 @@ namespace Systems {
 					// collision with terrain!
 					// @TODO: write to STDOUT
 
-					world.GetRegistry().destroy(projectile); // destroy the projectile
-					world.GetDispatcher().enqueue<Events::EventTargetDestroyed>(Events::EDestroyReason::CollisionWithTerrain);
+					world.GetRegistry().emplace_or_replace<Components::TagPendingDestroy>(projectile); // mark projectile for destruction
+					///world.GetRegistry().destroy(projectile); // destroy the projectile
+
+					// @TODO: shouldn't I trigger events immediately?
+					// @TODO: more performant approach: build an array of destroyed entities and reasons in the loop, and trigger events and destroy after all collisions are processed?
+					world.GetDispatcher().enqueue<Events::EventTargetDestroyed>(Events::EDestroyReason::CollisionWithTerrain);  
 					break;
 				}
 
@@ -83,6 +89,15 @@ namespace Systems {
 			{
 				world.GetRegistry().destroy(entity); //@TODO: send out of bounds message
 			}
+		}
+	}
+
+	void SysPendingDestroy::Update(GWorld& world)
+	{
+		auto entities = world.GetRegistry().view<Components::TagPendingDestroy>();
+		for (auto entity : entities)
+		{
+			world.GetRegistry().destroy(entity);
 		}
 	}
 }

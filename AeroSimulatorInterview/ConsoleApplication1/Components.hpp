@@ -19,6 +19,8 @@ namespace Components {
 	struct TagProjectile {};
 	struct TagTerrain {};
 
+	struct TagPendingDestroy {};
+
 }
 
 

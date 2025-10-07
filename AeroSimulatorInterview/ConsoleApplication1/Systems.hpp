@@ -24,4 +24,10 @@ namespace Systems {
 		public:
 			void Update(GWorld& world,  float bounding_sphere_radius);
 	};
+
+	class SysPendingDestroy
+	{
+		public:
+			void Update(GWorld& world);
+	};
 }

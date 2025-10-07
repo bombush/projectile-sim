@@ -63,8 +63,10 @@ void GWorld::Tick(float dt) {
 	Systems::SysMovement movementSystem;
 	Systems::SysCollision collisionSystem;
 	Systems::SysWorldBounds worldBoundsSystem;
+	Systems::SysPendingDestroy pendingDestroySystem;
 
-	movementSystem.Update(registry, gravity, dt);
-	collisionSystem.Update(registry);
-	worldBoundsSystem.Update(registry, bounding_sphere_radius);
+	movementSystem.Update(*this, gravity, dt);
+	collisionSystem.Update(*this);
+	worldBoundsSystem.Update(*this, bounding_sphere_radius);
+	pendingDestroySystem.Update(*this);
 }
