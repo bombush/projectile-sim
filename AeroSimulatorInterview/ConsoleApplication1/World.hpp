@@ -14,12 +14,13 @@ class GWorld {
 		GWorld(const GWorldConfig& config);
 		~GWorld();
 
-		// main simulation step
-		void Tick(float dt);
+		void Run(float total_simulation_time, float time_step);
 
 		entt::registry& GetRegistry();
 
 
+	private:
+		void Tick(float dt);
 	private:
 		// entity registry
 		entt::registry registry;

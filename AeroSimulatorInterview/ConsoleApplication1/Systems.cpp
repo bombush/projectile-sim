@@ -55,7 +55,7 @@ namespace Systems {
 				auto& pos_projectile = projectiles.get<Components::CompPosition>(projectile);
 				auto& pos_terrain = terrains.get<Components::CompTerrainCollision>(terrain);
 
-				if (pos_projectile.z <= pos_terrain.height)
+				if (pos_projectile.z <= pos_terrain.z_position)
 				{
 					// collision with terrain!
 					// @TODO: write to STDOUT
